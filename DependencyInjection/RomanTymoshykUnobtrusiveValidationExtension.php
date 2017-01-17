@@ -1,6 +1,6 @@
 <?php
 
-namespace RomanTymoshyk\UnobtrusiveValidationBundle;
+namespace RomanTymoshyk\UnobtrusiveValidationBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
