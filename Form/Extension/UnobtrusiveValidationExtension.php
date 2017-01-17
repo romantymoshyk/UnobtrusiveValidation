@@ -24,9 +24,7 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
     }
 
     /**
-     * @param FormView $view
-     * @param FormInterface $form
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
@@ -173,6 +171,9 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
         parent::configureOptions($resolver);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getExtendedType()
     {
         return 'Symfony\Component\Form\Extension\Core\Type\FormType';

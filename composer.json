@@ -1,5 +1,5 @@
 {
-    "name": "romantymoshyk/unobtrusivevalidation-bundle",
+    "name": "romantymoshyk/unobtrusive-validation-bundle",
     "type": "symfony-bundle",
     "description": "Form extension for integration of jQuery Unobtrusive Validation.",
     "keywords": [ "validation", "unobtrusive validation", "jquery", "clientside", "symfony form extension" ],
