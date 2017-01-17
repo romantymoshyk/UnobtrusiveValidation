@@ -1,0 +1,24 @@
+{
+    "name": "romantymoshyk/unobtrusivevalidation-bundle",
+    "type": "symfony-bundle",
+    "description": "Form extension for integration of jQuery Unobtrusive Validation.",
+    "keywords": [ "validation", "unobtrusive validation", "jquery", "clientside", "symfony form extension" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roman Tymoshyk",
+            "email": "tymoshyk.roman@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.16",
+        "symfony/form": "~3.0",
+		"symfony/framework-bundle": "~3.0"
+    },
+    "require-dev": {
+      "symfony/phpunit-bridge": "~3.0"
+    },
+    "autoload": {
+        "psr-4": { "RomanTymoshyk\\UnobtrusiveValidationBundle\\": "" }
+    }
+}
