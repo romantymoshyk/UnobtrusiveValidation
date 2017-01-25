@@ -1,0 +1,3 @@
+[![Build Status](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/badges/build.png?b=1.0)](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/build-status/1.0) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/badges/quality-score.png?b=1.0)](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/?branch=1.0) [![Code Coverage](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/badges/coverage.png?b=1.0)](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/?branch=1.0)
+# unobtrusive-validation-bundle
+Let you add support of Unobtrusive Validation to Symfony projects
