@@ -1,5 +1,6 @@
 [![Build Status](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/e8ff3f13-d477-4bb4-a341-533d3a03fcba/mini.png)](https://insight.sensiolabs.com/projects/e8ff3f13-d477-4bb4-a341-533d3a03fcba)
 [![Code Coverage](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/romantymoshyk/unobtrusive-validation-bundle/?branch=master)
 [![Total Downloads](https://poser.pugx.org/romantymoshyk/unobtrusive-validation-bundle/downloads)](https://packagist.org/packages/romantymoshyk/unobtrusive-validation-bundle)
 [![License](https://poser.pugx.org/romantymoshyk/unobtrusive-validation-bundle/license)](https://packagist.org/packages/romantymoshyk/unobtrusive-validation-bundle)
