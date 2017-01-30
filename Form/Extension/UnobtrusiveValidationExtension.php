@@ -18,13 +18,13 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
     /**
      * @var null|string
      */
-    private $translationDomain;
+    protected $translationDomain;
 
     /**
      * @param TranslatorInterface $translator The translator for translating error messages
      * @param null|string $translationDomain The translation domain for translating
      */
-    public function __construct(TranslatorInterface $translator, $translationDomain = null)
+    public function __construct(TranslatorInterface $translator = null, $translationDomain = false)
     {
         $this->translator = $translator;
         $this->translationDomain = $translationDomain;
@@ -39,9 +39,12 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
 
         $resolver->setDefaults(
             array(
-                'upload_max_size_message' => 'test'
+                'label_translation_domain' => false,
+                'translation_domain' => $this->translationDomain
             )
-        );
+        )
+            ->setAllowedTypes('label_translation_domain', array('null', 'string', 'boolean'))
+            ->setAllowedTypes('translation_domain', array('null', 'string', 'boolean'));
     }
 
     /**
@@ -52,7 +55,7 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
         if (count($options['constraints']) > 0) {
             $view->vars['attr']['data-val'] = 'true';
 
-            $label = $this->trans($options['label']);
+            $label = $this->trans($options['label'], array(), $options['label_translation_domain']);
 
             /** @var Constraint $constraint */
             foreach ($options['constraints'] as $constraint) {
@@ -71,27 +74,6 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
                         $view->vars['attr']['data-val-regex-pattern'] = $constraint->htmlPattern;
                         break;
                     case 'Symfony\Component\Validator\Constraints\Range':
-                        if (!empty($constraint->min)) {
-                            $view->vars['attr']['data-val-range-min'] = $constraint->min;
-                            $view->vars['attr']['data-val-range'] = $this->trans(
-                                'The field \'{{ field_name }}\' value should be {{ limit }} or more.',
-                                array(
-                                    '{{ field_name }}' => $label,
-                                    '{{ limit }}' => $constraint->min
-                                )
-                            );
-                        }
-                        if (!empty($constraint->max)) {
-                            $view->vars['attr']['data-val-range-max'] = $constraint->max;
-                            $view->vars['attr']['data-val-range'] = $this->trans(
-                                'The field \'{{ field_name }}\' value should be {{ limit }} or less.',
-                                array(
-                                    '{{ field_name }}' => $label,
-                                    '{{ limit }}' => $constraint->max
-                                )
-                            );
-                        }
-
                         if (!empty($constraint->min) && !empty($constraint->max)) {
                             $view->vars['attr']['data-val-range'] = $this->trans(
                                 'The field \'{{ field_name }}\' value should be in range {{ min }} to {{ max }}.',
@@ -99,6 +81,30 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
                                     '{{ field_name }}' => $label,
                                     '{{ min }}' => $constraint->min,
                                     '{{ max }}' => $constraint->max
+                                )
+                            );
+                        }
+                        break;
+                    case 'Symfony\Component\Validator\Constraints\LessThanOrEqual':
+                        if (!empty($constraint->min)) {
+                            $view->vars['attr']['data-val-length-max'] = $constraint->min;
+                            $view->vars['attr']['data-val-length'] = $this->trans(
+                                'The field \'{{ field_name }}\' should be less than {{ limit }}.',
+                                array(
+                                    '{{ field_name }}' => $label,
+                                    '{{ limit }}' => $constraint->min
+                                )
+                            );
+                        }
+                        break;
+                    case 'Symfony\Component\Validator\Constraints\GreaterThanOrEqual':
+                        if (!empty($constraint->min)) {
+                            $view->vars['attr']['data-val-length-min'] = $constraint->min;
+                            $view->vars['attr']['data-val-length'] = $this->trans(
+                                'The field \'{{ field_name }}\' should be greater than {{ limit }}.',
+                                array(
+                                    '{{ field_name }}' => $label,
+                                    '{{ limit }}' => $constraint->min
                                 )
                             );
                         }
@@ -202,31 +208,20 @@ class UnobtrusiveValidationExtension extends AbstractTypeExtension
      *
      * @return string The translated string
      */
-    public function trans($id, array $parameters = array())
+    public function trans($id, array $parameters = array(), $translationDomain = null)
     {
-        return $this->translator !== null && $this->translationDomain !== false ? $this->translator->trans(
-            $id,
-            $parameters,
-            $this->translationDomain
-        ) : $id;
-    }
+        $result = $id;
 
-    /**
-     * Translates the given choice message by choosing a translation according to a number.
-     *
-     * @param string $id The message id (may also be an object that can be cast to string)
-     * @param int $number The number to use to find the indice of the message
-     * @param array $parameters An array of parameters for the message
-     *
-     * @return string The translated string
-     */
-    public function transChoice($id, $number, array $parameters = array())
-    {
-        return $this->translator !== null && $this->translationDomain !== false ? $this->translator->transChoice(
-            $id,
-            $number,
-            $parameters,
-            $this->translationDomain
-        ) : $id;
+        if ($this->translator !== null) {
+            $translationDomain = $translationDomain !== null ? $translationDomain : $this->translationDomain;
+
+            $result = $this->translator->trans(
+                $id,
+                $parameters,
+                $translationDomain
+            );
+        }
+
+        return $result;
     }
 }
